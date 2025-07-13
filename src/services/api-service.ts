@@ -13,11 +13,12 @@ interface Props {
  * @returns A StationMonitorRequest object.
  */
 export async function fetchDepartures({ stationCode }: Props): Promise<StationMonitorRequest> {
-  console.log("Requesting data from api...")
-  return new Promise((resolve) => {
-    var data = apiReply;
-    resolve(data);
-  })
+  // TODO: Build proper logic to decide when an error needs to be thrown
+  if (true) {
+    return apiReply;
+  }
+
+  throw new Error('Failed to load data: Network error or API unavailable.');
 }
 
 export const apiReply = {
