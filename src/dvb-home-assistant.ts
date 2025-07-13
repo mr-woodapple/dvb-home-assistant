@@ -6,7 +6,7 @@ import "./view/main-card-structure.ts"
 
 @customElement('dvb-home-assistant')
 export class DvbHomeAssistant extends LitElement {
-
+  
   @property({ type: Object }) hass: any; // Home Assistant object
   @property({ type: Object }) config: any;
 
@@ -20,7 +20,14 @@ export class DvbHomeAssistant extends LitElement {
   }
 }
 
-/**
- * Register element with HA
- */
-customElements.define('dvb-home-assistant', DvbHomeAssistant);
+// TODO: Expose stub config for Home Assistants card picker preview
+
+// HACS register
+window.customCards = window.customCards || [];
+window.customCards.push({
+  type: "dvb-home-assistant",
+  name: "DVB Home Assistant",
+  preview: true,
+  description: "DVB & VVO Abfahrtsmonitor für Home Assistant",
+  documentationURL: "https://github.com/mr-woodapple/dvb-home-assistant"
+})

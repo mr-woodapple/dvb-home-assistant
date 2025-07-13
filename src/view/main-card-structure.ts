@@ -1,7 +1,7 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
-import "./departure-monitor.ts";
+import "./departure-monitor/departure-monitor.js";
 
 
 @customElement("main-card-structure")
@@ -11,11 +11,12 @@ export class MainCardStructure extends LitElement {
 
   static styles = css`
     ha-card {
-      /* border: 2px dashed red; */
-      display: flex
+      display: flex;
     }
+      
     .content-container {
-      margin: 10px
+      width: 100%;
+      margin: 2rem;
     }
   `
 

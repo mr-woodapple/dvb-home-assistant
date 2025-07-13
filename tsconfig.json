@@ -14,6 +14,6 @@
     "experimentalDecorators": true, // Required for Lit decorators
     "useDefineForClassFields": false, // Recommended for Lit with TS
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "global.d.ts"],
   "exclude": ["node_modules"]
 }
