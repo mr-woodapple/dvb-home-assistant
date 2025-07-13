@@ -12,7 +12,7 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true, // Required for Lit decorators
-    "useDefineForClassFields": false // Recommended for Lit with TS
+    "useDefineForClassFields": false, // Recommended for Lit with TS
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
