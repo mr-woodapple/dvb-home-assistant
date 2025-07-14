@@ -12,16 +12,16 @@ import { convertMsJSONDate } from "utils/helper";
  * Departure monitor element, queries data for a given station 
  * at the current time. Shows line, destination and time of departure.
  * 
- * @param stationCode Id of the station to query data for. 
+ * @param stopId Id of the station to query data for. 
  */
 @customElement("departure-monitor")
 export class DepartureMonitor extends LitElement {
 
-  @property() stationCode?: string;
+  @property() stopId?: string;
 
   private _fetchDepartures = new Task(this, {
-    args: () => [this.stationCode],
-    task: async ([stationCode]) => await fetchDepartures({ stationCode })
+    args: () => [this.stopId],
+    task: async ([stopId]) => await fetchDepartures({ stopId })
   })
 
   static styles = css`

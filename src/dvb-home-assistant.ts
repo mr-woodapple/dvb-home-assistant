@@ -1,26 +1,46 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js'
+import { Config, DefaultConfig, StubConfig } from 'types/config/config.js';
+import { Hass } from 'types/config/hass.js';
 
 import "./view/main-card-structure.ts"
+import { DvbHomeAssistantEditor } from 'view/dvb-home-assistant-editor.js';
 
 
 @customElement('dvb-home-assistant')
 export class DvbHomeAssistant extends LitElement {
-  
-  @property({ type: Object }) hass: any; // Home Assistant object
-  @property({ type: Object }) config: any;
+
+  @property() hass?: Hass; // Home Assistant object
+  @property() config: Config = { ...DefaultConfig };
 
   render() {
-    return html 
-    `<main-card-structure></main-card-structure>`;
+    console.log("Config is: ", this.config);
+
+    return html`<main-card-structure></main-card-structure>`;
   }
 
-  setConfig(config: any) {
+  setConfig(config: Config) {
+    if (!config.stopId) {
+      throw new Error("Property 'stopId' needs to be provided.")
+    }
     this.config = config;
+  }
+
+  // Get a new instance of the editor for 
+  // Home Assistants visual card editor feature.
+  static getConfigElement() {
+    return document.createElement('dvb-home-assistant-editor');
+  }
+
+  // Expose stub config for Home Assistants card picker preview
+  static getStubConfig() {
+    return StubConfig;
   }
 }
 
-// TODO: Expose stub config for Home Assistants card picker preview
+// Register the editor 
+// Not sure why this above the editor isn't enough: @customElement("dvb-home-assistant-editor")
+customElements.define('dvb-home-assistant-editor', DvbHomeAssistantEditor)
 
 // HACS register
 window.customCards = window.customCards || [];

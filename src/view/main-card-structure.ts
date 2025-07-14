@@ -31,7 +31,7 @@ export class MainCardStructure extends LitElement {
         </div>
 
         <div class="content-container">
-          <departure-monitor></departure-monitor>
+          <departure-monitor stat></departure-monitor>
         </div>
       </ha-card>
     `

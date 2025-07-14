@@ -8,12 +8,10 @@
 export function convertMsJSONDate(dateString: string): Date {
   // Ensure the format is correct
   const match = dateString.match(/\/Date\((\d+)([+-]\d{4})?\)\//);
+  
   if (match) {
     const timestamp = parseInt(match[1], 10);
-    const date = new Date(timestamp);
-    console.log(date.toISOString()); // Outputs the ISO string representation
-
-    return date;
+    return new Date(timestamp);
   }
 
   // Return a default value if the format is incorrect

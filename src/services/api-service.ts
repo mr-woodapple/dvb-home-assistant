@@ -2,19 +2,20 @@ import { StationMonitorRequest } from 'types/types';
 
 
 interface Props {
-  stationCode?: string | undefined;
+  stopId?: string | undefined;
 }
 
 /**
  * Fetch departures for a given station code from the official
  * DVB api.
  * 
- * @param stationCode  
+ * @param stopId  
  * @returns A StationMonitorRequest object.
  */
-export async function fetchDepartures({ stationCode }: Props): Promise<StationMonitorRequest> {
+export async function fetchDepartures({ stopId }: Props): Promise<StationMonitorRequest> {
   // TODO: Build proper logic to decide when an error needs to be thrown
   if (true) {
+    console.log("Running api request for station with id: ", stopId)
     return apiReply;
   }
 
