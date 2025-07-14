@@ -10,13 +10,14 @@ import { DvbHomeAssistantEditor } from 'view/dvb-home-assistant-editor.js';
 @customElement('dvb-home-assistant')
 export class DvbHomeAssistant extends LitElement {
 
-  @property() hass?: Hass; // Home Assistant object
-  @property() config: Config = { ...DefaultConfig };
+  @property({ attribute: false }) hass?: Hass; // Home Assistant object
+  @property({ attribute: false }) config: Config = { ...DefaultConfig };
 
   render() {
-    console.log("Config is: ", this.config);
-
-    return html`<main-card-structure></main-card-structure>`;
+    return html`
+    <main-card-structure 
+      config="${this.config}"
+    ></main-card-structure>`;
   }
 
   setConfig(config: Config) {

@@ -2,7 +2,7 @@ import { StationMonitorRequest } from 'types/types';
 
 
 interface Props {
-  stopId?: string | undefined;
+  stopId: string;
 }
 
 /**
@@ -13,14 +13,24 @@ interface Props {
  * @returns A StationMonitorRequest object.
  */
 export async function fetchDepartures({ stopId }: Props): Promise<StationMonitorRequest> {
-  // TODO: Build proper logic to decide when an error needs to be thrown
-  if (true) {
-    console.log("Running api request for station with id: ", stopId)
-    return apiReply;
-  }
+  if (!stopId) throw new Error("Property 'stopId' is missing or empty.");
+  
+  const url = "https://webapi.vvo-online.de/dm"
+  
+  const params = new URLSearchParams();
+  params.append("format", "json");
+  params.append("stopId", stopId.toString());
+  params.append("limit", "5"); // TODO: Make this a user input
+  
+  const response = await fetch(`${url}?${params.toString()}`)
 
-  throw new Error('Failed to load data: Network error or API unavailable.');
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw new Error('Failed to fetch data: Network error or API unavailable.');
+  }
 }
+
 
 export const apiReply = {
   "Name": "Bannewitzer Straße",

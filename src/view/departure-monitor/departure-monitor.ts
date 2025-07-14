@@ -1,4 +1,4 @@
-import { css, html, LitElement, svg } from "lit";
+import { css, html, LitElement } from "lit";
 import { Task } from '@lit/task';
 import { customElement, property } from "lit/decorators.js";
 import { fetchDepartures } from "services/api-service";
@@ -17,7 +17,7 @@ import { convertMsJSONDate } from "utils/helper";
 @customElement("departure-monitor")
 export class DepartureMonitor extends LitElement {
 
-  @property() stopId?: string;
+  @property() stopId: string = "";
 
   private _fetchDepartures = new Task(this, {
     args: () => [this.stopId],
@@ -56,7 +56,7 @@ export class DepartureMonitor extends LitElement {
                 <svg  xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 0 74 74">
                   ${Icons.Station}
                 </svg>
-                <h1 class="station-name">${result.Name ?? "Station"}</h1>
+                <h1 class="station-name">${result.Name ?? "Station unbekannt"}</h1>
               </div>
 
               <div class="departures">

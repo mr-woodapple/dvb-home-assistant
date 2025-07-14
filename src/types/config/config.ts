@@ -1,6 +1,6 @@
 export interface Config {
   title?: string,
-  stopId?: string,
+  stopId: string,
 }
 
 /**
@@ -8,7 +8,7 @@ export interface Config {
  */
 export const DefaultConfig: Config = {
   title: undefined,
-  stopId: undefined,
+  stopId: "33000037", // Postplatz, Dresden
 }
 
 /**
