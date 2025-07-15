@@ -4,7 +4,7 @@ export interface Config {
 }
 
 /**
- * The standard (empty) config.
+ * The standard config (used if no config is present, for example during development outside HA).
  */
 export const DefaultConfig: Config = {
   title: undefined,

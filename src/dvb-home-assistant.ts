@@ -12,9 +12,9 @@ export class DvbHomeAssistant extends LitElement {
   @property({ attribute: false }) hass?: Hass; // Home Assistant object
   @property({ attribute: false }) config: Config = { ...DefaultConfig };
 
-  render() {  
+  render() {
     return html`
-    <main-card-structure 
+    <main-card-structure
       .config=${this.config}
     ></main-card-structure>`;
   }

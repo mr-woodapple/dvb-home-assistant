@@ -4,9 +4,8 @@ import { customElement, property } from "lit/decorators.js";
 import { fetchDepartures } from "services/api-service";
 import { StationMonitorRequest, Departure } from "types/types";
 
+import "./departure-entry.ts"
 import * as Icons from "../../assets/icons"
-import { convertMsJSONDate } from "utils/helper";
-
 
 /**
  * Departure monitor element, queries data for a given station 
@@ -68,55 +67,6 @@ export class DepartureMonitor extends LitElement {
           `,
           error: (e) => html`<div class="error">${e}</div>`
         })}
-      </div>
-    `
-  }
-}
-
-@customElement("departure-entry")
-export class DepartureEntry extends LitElement {
-
-  @property() departure?: Departure;
-
-  static styles = css `
-    .departure {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .content-start {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-  `
-
-  render() {
-    return html`
-      <div class="departure">
-        <div class="content-start">
-          <!-- TODO: Make these change on the vehicle type -->
-          <svg height="20" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-            ${Icons.CityBus}
-          </svg>
-          
-          <div class="line-direction">
-            <div>
-              ${this.departure?.LineName}
-              ${this.departure?.Direction}
-            </div>
-      
-            <div>
-              Steig ${this.departure?.Platform?.Name}
-            </div>
-          </div>
-        </div>
-        
-        <div class="content-end">
-          ${convertMsJSONDate(this.departure?.ScheduledTime!).toLocaleTimeString("de-DE", {hour: '2-digit', minute: '2-digit', hour12: false})}
-        </div>
       </div>
     `
   }
