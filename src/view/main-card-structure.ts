@@ -26,13 +26,12 @@ export class MainCardStructure extends LitElement {
       <ha-card>
         <ha-ripple></ha-ripple>
 
-        <!-- Always render the title -->
         <div class="header-container">
           ${html`<h1 class="card-header">${this.config?.title}</h1>`}
         </div>
 
         <div class="content-container">
-          <departure-monitor stopId="${this.config?.stopId}"></departure-monitor>
+          <departure-monitor .stopId="${this.config?.stopId}"></departure-monitor>
         </div>
       </ha-card>
     `

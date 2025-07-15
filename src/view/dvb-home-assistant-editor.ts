@@ -126,10 +126,10 @@ export class DvbHomeAssistantEditor extends LitElement {
     }
 
     // Create a deep copy of the config
-    const config = JSON.parse(JSON.stringify(this._config)) as Record<string, unknown>;
+    const config: Config = { ...this._config };
 
     // Assign value
-    config[path] = value;
+    (config as any)[path] = value;
 
     // Notify HA about the change
     this._config = config;

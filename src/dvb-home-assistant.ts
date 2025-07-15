@@ -6,23 +6,22 @@ import { Hass } from 'types/config/hass.js';
 import "./view/main-card-structure.ts"
 import { DvbHomeAssistantEditor } from 'view/dvb-home-assistant-editor.js';
 
-
 @customElement('dvb-home-assistant')
 export class DvbHomeAssistant extends LitElement {
 
   @property({ attribute: false }) hass?: Hass; // Home Assistant object
   @property({ attribute: false }) config: Config = { ...DefaultConfig };
 
-  render() {
+  render() {  
     return html`
     <main-card-structure 
-      config="${this.config}"
+      .config=${this.config}
     ></main-card-structure>`;
   }
 
   setConfig(config: Config) {
-    if (!config.stopId) {
-      throw new Error("Property 'stopId' needs to be provided.")
+    if (!config) {
+      throw new Error("Config missing, but needs to be provided.")
     }
     this.config = config;
   }
