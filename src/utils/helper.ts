@@ -26,6 +26,10 @@ export function getDepartureTime(dateString: string): string {
 
 // Returns the difference between two timestamps in minutes, if more than 0 add a "+", otherwise "-"
 export function getTimeDifferenceInMinutes(scheduled: string, realtime: string): string {
+  if (!realtime) {
+    return "";
+  }
+
   var scheduledDate = convertMsJSONDate(scheduled);
   var realTimeDate = convertMsJSONDate(realtime);
 
@@ -36,6 +40,10 @@ export function getTimeDifferenceInMinutes(scheduled: string, realtime: string):
 
 // Returns the departure time, if less than 10 min from now show 
 export function getDepartureTimeToDisplay(realTime: string): string {
+  if (!realTime) {
+    throw new Error("Realtime date is not available!")
+  };
+
   var realTimeDate = convertMsJSONDate(realTime);
   var now = Date.now();
   var differenceInMinutes = Math.round((realTimeDate.getTime() - now) / (1000 * 60));
