@@ -1,3 +1,6 @@
+import { Departure } from "types/types";
+
+
 /**
  * Converts a Microsoft JSON date string to a standard JavaScript date object.
  * If pattern matching on the string fails, the standard date object is returned.
@@ -33,30 +36,29 @@ export function getTimeDifferenceInMinutes(scheduled: string, realtime: string):
   var scheduledDate = convertMsJSONDate(scheduled);
   var realTimeDate = convertMsJSONDate(realtime);
 
-  const differenceInMinutes = Math.round((realTimeDate.getTime() - scheduledDate.getTime()) / (1000 * 60));
-  
+  const differenceInMinutes = Math.ceil((realTimeDate.getTime() - scheduledDate.getTime()) / (1000 * 60));
   return differenceInMinutes > 0 ? `+${differenceInMinutes}` : `${differenceInMinutes}`
 }
 
 // Returns the departure time, if less than 10 min from now show 
-export function getDepartureTimeToDisplay(realTime: string): string {
-  if (!realTime) {
-    throw new Error("Realtime date is not available!")
-  };
+export function getDepartureTimeToDisplay(departure?: Departure): string {
+  if (!departure) throw new Error("Departure not present, please open a GitHub issue.")
 
-  var realTimeDate = convertMsJSONDate(realTime);
+  // departure.RealTime can be null (on Alitas for example, handling this here)
+  var dateString = departure.RealTime ? departure.RealTime : departure.ScheduledTime;
+
+  var dateTime = convertMsJSONDate(dateString!).getTime();
   var now = Date.now();
-  var differenceInMinutes = Math.round((realTimeDate.getTime() - now) / (1000 * 60));
+
+  var differenceInMinutes = Math.ceil((dateTime - now) / (1000 * 60));
 
   if (differenceInMinutes > 10) {
-    return getDepartureTime(realTime);
-  } else if (differenceInMinutes < 30) {
+    return getDepartureTime(dateString!);
+  } else if (differenceInMinutes < 10 && differenceInMinutes > 0) {
     return `In ${differenceInMinutes} Min.`
-  } else if (differenceInMinutes == 0) {
-    return `Jetzt`
   } else if (differenceInMinutes < 0) {
     return `Vor ${differenceInMinutes} Min.`
-  } 
-
-  return 'Unbekannt'
+  } else {
+    return `Jetzt`
+  }
 }

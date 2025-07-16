@@ -60,9 +60,7 @@ export class DepartureEntry extends LitElement {
         
         <div class="content-end">
           <div>
-            ${this.departure?.RealTime 
-              ? getDepartureTimeToDisplay(this.departure?.RealTime!) 
-              : getDepartureTime(this.departure?.ScheduledTime!)}
+            ${getDepartureTimeToDisplay(this.departure)}
           </div>
 
           <div>
