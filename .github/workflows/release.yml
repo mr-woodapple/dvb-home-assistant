@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Run build
         run: npm run build
 
-      - name: Release
+      - name: Create release
         uses: softprops/action-gh-release@v2
         with:
           draft: true
