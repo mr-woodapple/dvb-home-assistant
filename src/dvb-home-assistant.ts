@@ -6,6 +6,9 @@ import { Hass } from 'types/config/hass.js';
 import "./view/main-card-structure.ts"
 import { DvbHomeAssistantEditor } from 'view/dvb-home-assistant-editor.js';
 
+/**
+ * Entry element for the Lovelace card.
+ */
 @customElement('dvb-home-assistant')
 export class DvbHomeAssistant extends LitElement {
 

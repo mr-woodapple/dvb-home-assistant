@@ -33,6 +33,8 @@ export class DepartureMonitor extends LitElement {
 
       .station-name {
         margin: 0;
+        font-weight: bold;
+        font-size: var(--ha-font-size-3xl)
       }
     }
 
@@ -55,7 +57,7 @@ export class DepartureMonitor extends LitElement {
                 <svg  xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 0 74 74">
                   ${Icons.Station}
                 </svg>
-                <h1 class="station-name">${result.Name ?? "Station unbekannt"}</h1>
+                <span class="station-name">${result.Name ?? "Station unbekannt"}</span>
               </div>
 
               <div class="departures">

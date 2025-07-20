@@ -1,6 +1,5 @@
 import { StationMonitorRequest } from 'types/types';
 
-
 interface Props {
   stopId: string;
 }
@@ -302,7 +301,7 @@ export const MockApiReplyWithDelay = {
         "Network": "voe"
       },
       "CancelReasons": [],
-      "Occupancy": "ManySeats"
+      "Occupancy": "NoSeats"
     },
     {
       "Id": "voe:21068: :H:j25",
@@ -323,7 +322,7 @@ export const MockApiReplyWithDelay = {
         "Network": "voe"
       },
       "CancelReasons": [],
-      "Occupancy": "ManySeats"
+      "Occupancy": "LessSeats"
     },
     {
       "Id": "voe:21068: :R:j25",
