@@ -8,7 +8,6 @@ export default {
   output: {
     dir: 'dist',
     format: 'es',
-    // Use the dynamic filename based on NODE_ENV
     entryFileNames: 'dvb-home-assistant.js', 
     sourcemap: true,
   },
