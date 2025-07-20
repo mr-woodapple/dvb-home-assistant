@@ -1,4 +1,4 @@
-import { html, LitElement, TemplateResult } from "lit";
+import { css, html, LitElement, TemplateResult } from "lit";
 import { property } from "lit/decorators.js";
 import { Config } from "types/config/config";
 import { Hass } from "types/config/hass";
@@ -18,6 +18,22 @@ export class DvbHomeAssistantEditor extends LitElement {
     // TODO: Implement logic
   }
 
+  static styles = css`
+    .card-config {
+      display: flex; 
+      flex-direction: column;
+    }
+
+    .helper-text {
+      color: var(--secondary-text-color);
+      font-size: var(--ha-font-size-s);
+
+      &a, a:visited {
+        color: var(--secondary-text-color);
+      }
+    }
+  `
+
   // Render the editor ui
   render() {
     if (!this.hass || !this._config) {
@@ -27,12 +43,16 @@ export class DvbHomeAssistantEditor extends LitElement {
     }
 
     return html`
-      <div style="display: flex; flex-direction: column">
+      <div class="card-config">
         <h2>Allgemeine Einstellungen</h2>
       
         ${this.addTextField(
           "stopId", "Haltestellen Id", "text"
         )}
+        <p class="helper-text">
+          Die ID für die anzuzeigenden Haltestelle findest du so:
+          <a href="https://github.com/mr-woodapple/dvb-home-assistant/tree/master" target"_blank">Klick mich</a>
+        </p>
       </div>
     `
   }

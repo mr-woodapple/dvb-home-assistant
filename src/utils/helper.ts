@@ -1,6 +1,7 @@
 import { html, TemplateResult } from "lit";
 import { Departure } from "types/types";
 
+
 /**
  * Converts a Microsoft JSON date string to a standard JavaScript date object.
  * If pattern matching on the string fails, the standard date object is returned.

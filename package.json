@@ -1,16 +1,24 @@
 {
   "name": "dvb-home-assistant",
-  "version": "0.0.1",
+  "author": "mr-woodapple",
+  "version": "1.0.0",
+  "description": "A departure monitor for DVB & VVO as a lovelace card for Home Assitant.",
+  "license": "MIT",
+  "keywords": [
+    "home-assistant",
+    "homeassistant",
+    "lovelace",
+    "dvb",
+    "vvo",
+    "dresden"
+  ],
+  
   "main": "index.js",
   "scripts": {
     "build": "rollup --config",
     "build:watch": "rollup --config --watch",
     "start:watch": "web-dev-server --open dev/ --node-resolve --watch"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
