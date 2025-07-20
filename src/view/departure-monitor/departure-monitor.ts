@@ -2,7 +2,7 @@ import { css, html, LitElement } from "lit";
 import { Task } from '@lit/task';
 import { customElement, property } from "lit/decorators.js";
 import { fetchDepartures } from "services/api-service";
-import { StationMonitorRequest, Departure } from "types/types";
+import { StationMonitorRequest } from "types/types";
 
 import "./departure-entry.ts"
 import * as Icons from "../../assets/icons"
