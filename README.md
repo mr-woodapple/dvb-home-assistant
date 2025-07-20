@@ -6,7 +6,7 @@ Custom Lovelace card that acts as a departure monitor for the DVB (Dresden) and 
 ## 📦 Installation
 The easiest way to install DVB Home Assitant is via [HACS](https://www.hacs.xyz/).
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=mr-woodapple&repository=dvb-home-assistant)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=mr-woodapple&repository=dvb-home-assistant&category=plugin)
 
 ## ✏️ Setup
 After you've installed **DVB Home Assistant**, follow these steps to configure the card to your liking.
@@ -30,7 +30,6 @@ After you've installed **DVB Home Assistant**, follow these steps to configure t
 If you're not happy with the Dresden Postplatz station (which is the default), you need to find the `stop_id` of your station.
 
 #### How do I find the `stop_id`?
-
 Glad you're asking! I haven't found a user-friendly way yet, so in the meantime copy the URL below into any browser, just change the word "Hauptbahnhof" to your station name. The first number (highlighted in the screenshot) is what you're looking for.
 
 > https://webapi.vvo-online.de/tr/pointfinder?format=JSON&stopsOnly=True&query=%20Hauptbahnhof
