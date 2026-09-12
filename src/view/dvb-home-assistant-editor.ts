@@ -53,6 +53,9 @@ export class DvbHomeAssistantEditor extends LitElement {
         ${this.addTextField(
           "retrievedDepartureLimit", "Abzurufende Abfahrten", "number", "50"
         )}
+        ${this.addTextField(
+          "displayedDepartureLimit", "Angezeigte Abfahrten", "number", "5"
+        )}
         <p class="helper-text">
           Die ID für die anzuzeigenden Haltestelle findest du so:
           <a href="https://github.com/mr-woodapple/dvb-home-assistant/tree/master" target"="_blank">Klick mich</a>
@@ -124,13 +127,13 @@ export class DvbHomeAssistantEditor extends LitElement {
     const target = event.target as HTMLInputElement | HTMLSelectElement;
     const name = target.getAttribute('name');
 
-    let value: string | string[] | boolean | number | null = target.value;
+    let value: string | string[] | boolean | number | null | undefined = target.value;
     if (!name) return;
 
     if (name === "platforms") {
       value = target.value.split(",");
-    } else if (name === "retrievedDepartureLimit") {
-      value = Number(target.value);
+    } else if (name === "retrievedDepartureLimit" || name === "displayedDepartureLimit") {
+      value = target.value === "" ? undefined : Number(target.value);
     }
 
     this.setConfigValue(name as keyof Config, value);

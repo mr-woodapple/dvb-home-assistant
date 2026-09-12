@@ -45,19 +45,21 @@ Use `platforms` to show departures from only specific platform labels. The visua
 type: custom:dvb-home-assistant
 stopId: "33000037"
 platforms:
-	- "5"
-	- "7"
+    - "5"
+    - "7"
 retrievedDepartureLimit: 50
+displayedDepartureLimit: 5
 ```
 
-`retrievedDepartureLimit` controls how many departures are requested before filtering. It defaults to `50` and accepts whole numbers from `1` through `100`; the card displays up to five matching departures.
+`retrievedDepartureLimit` controls how many departures are requested before filtering. It defaults to `50` and accepts whole numbers from `1` through `100`.
+`displayedDepartureLimit` controls how many matching departures are rendered after filtering. It defaults to `5` and accepts whole numbers of `1` or greater.
 
 
 ## ⚙️ Development
 To start a development server (assuming you have run `npm install` already), open two command lines. In the first one, you run
 > npm run build:watch
 
-and in the second one, you run 
+and in the second one, you run
 > npm run start:watch
 
 That way, we start `rollup` in it's "watch" mode and the `@web/web-dev-server` to serve a static html file from the `dev` folder. Not ideal, but works for now.

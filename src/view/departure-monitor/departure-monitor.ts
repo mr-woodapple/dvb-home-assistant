@@ -19,6 +19,7 @@ export class DepartureMonitor extends LitElement {
   @property() stopId: string = "";
   @property({ attribute: false }) platforms: string[] = [];
   @property({ attribute: false }) retrievedDepartureLimit?: number;
+  @property({ attribute: false }) displayedDepartureLimit?: number;
 
   private _fetchDepartures = new Task(this, {
     args: () => [this.stopId, this.retrievedDepartureLimit] as const,
@@ -55,6 +56,14 @@ export class DepartureMonitor extends LitElement {
     );
   }
 
+  private getDisplayedDepartureLimit(): number {
+    if (this.displayedDepartureLimit === undefined || isNaN(this.displayedDepartureLimit)) {
+      return 5;
+    }
+    const truncated = Math.trunc(this.displayedDepartureLimit);
+    return truncated >= 1 ? truncated : 5;
+  }
+
   private getDisplayedDepartures(result: StationMonitorRequest, platformFilter: Set<string>): Departure[] {
     const departures = result.Departures ?? [];
     const matchingDepartures = platformFilter.size === 0
@@ -64,7 +73,7 @@ export class DepartureMonitor extends LitElement {
         return platformName !== undefined && platformFilter.has(platformName);
       });
 
-    return matchingDepartures.slice(0, 5);
+    return matchingDepartures.slice(0, this.getDisplayedDepartureLimit());
   }
 
   render() {

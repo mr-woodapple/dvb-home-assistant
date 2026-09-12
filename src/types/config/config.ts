@@ -3,6 +3,7 @@ export interface Config {
   stopId: string,
   platforms?: string[],
   retrievedDepartureLimit?: number,
+  displayedDepartureLimit?: number,
 }
 
 /**
@@ -12,6 +13,7 @@ export const DefaultConfig: Config = {
   title: undefined,
   stopId: "33000037", // Postplatz, Dresden
   retrievedDepartureLimit: 50,
+  displayedDepartureLimit: 5,
 }
 
 /**
@@ -20,4 +22,5 @@ export const DefaultConfig: Config = {
 export const StubConfig: Config = {
   stopId: "33000037", // Postplatz, Dresden
   retrievedDepartureLimit: 50,
+  displayedDepartureLimit: 5,
 }

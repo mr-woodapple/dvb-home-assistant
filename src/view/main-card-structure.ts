@@ -35,6 +35,7 @@ export class MainCardStructure extends LitElement {
             .stopId=${this.config?.stopId ?? ""}
             .platforms=${this.config?.platforms ?? []}
             .retrievedDepartureLimit=${this.config?.retrievedDepartureLimit}
+            .displayedDepartureLimit=${this.config?.displayedDepartureLimit}
           ></departure-monitor>
         </div>
       </ha-card>
