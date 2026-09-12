@@ -3,6 +3,18 @@ import { StationMonitorRequest } from 'types/types';
 
 interface Props {
   stopId: string;
+  retrievedDepartureLimit?: number;
+}
+
+const DEFAULT_RETRIEVED_DEPARTURE_LIMIT = 50;
+const MAX_RETRIEVED_DEPARTURE_LIMIT = 100;
+
+function getRetrievedDepartureLimit(limit?: number): number {
+  if (!Number.isInteger(limit) || !limit || limit > MAX_RETRIEVED_DEPARTURE_LIMIT) {
+    return DEFAULT_RETRIEVED_DEPARTURE_LIMIT;
+  }
+
+  return limit;
 }
 
 /**
@@ -12,7 +24,7 @@ interface Props {
  * @param stopId  
  * @returns A StationMonitorRequest object.
  */
-export async function fetchDepartures({ stopId }: Props): Promise<StationMonitorRequest> {
+export async function fetchDepartures({ stopId, retrievedDepartureLimit }: Props): Promise<StationMonitorRequest> {
   if (!stopId) throw new Error("Property 'stopId' is missing or empty.");
 
   const url = "https://webapi.vvo-online.de/dm"
@@ -20,7 +32,7 @@ export async function fetchDepartures({ stopId }: Props): Promise<StationMonitor
   const params = new URLSearchParams();
   params.append("format", "json");
   params.append("stopId", stopId.toString());
-  params.append("limit", "5"); // TODO: Make this a user input
+  params.append("limit", getRetrievedDepartureLimit(retrievedDepartureLimit).toString());
 
 
   if (true) {

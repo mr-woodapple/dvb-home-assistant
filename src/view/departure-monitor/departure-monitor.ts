@@ -2,7 +2,7 @@ import { css, html, LitElement } from "lit";
 import { Task } from '@lit/task';
 import { customElement, property } from "lit/decorators.js";
 import { fetchDepartures } from "services/api-service";
-import { StationMonitorRequest } from "types/types";
+import { Departure, StationMonitorRequest } from "types/types";
 
 import "./departure-entry.ts"
 import * as Icons from "../../assets/icons"
@@ -17,10 +17,12 @@ import * as Icons from "../../assets/icons"
 export class DepartureMonitor extends LitElement {
 
   @property() stopId: string = "";
+  @property({ attribute: false }) platforms: string[] = [];
+  @property({ attribute: false }) retrievedDepartureLimit?: number;
 
   private _fetchDepartures = new Task(this, {
-    args: () => [this.stopId],
-    task: async ([stopId]) => await fetchDepartures({ stopId })
+    args: () => [this.stopId, this.retrievedDepartureLimit] as const,
+    task: async ([stopId, retrievedDepartureLimit]) => await fetchDepartures({ stopId, retrievedDepartureLimit })
   })
 
   static styles = css`
@@ -45,6 +47,26 @@ export class DepartureMonitor extends LitElement {
     }
   `
 
+  private getPlatformFilter(): Set<string> {
+    return new Set(
+      this.platforms
+        .map((platform) => platform.trim())
+        .filter((platform) => platform.length > 0)
+    );
+  }
+
+  private getDisplayedDepartures(result: StationMonitorRequest, platformFilter: Set<string>): Departure[] {
+    const departures = result.Departures ?? [];
+    const matchingDepartures = platformFilter.size === 0
+      ? departures
+      : departures.filter((departure) => {
+        const platformName = departure.Platform?.Name?.trim();
+        return platformName !== undefined && platformFilter.has(platformName);
+      });
+
+    return matchingDepartures.slice(0, 5);
+  }
+
   render() {
     return html`
       <div class="departure-monitor">
@@ -61,9 +83,14 @@ export class DepartureMonitor extends LitElement {
               </div>
 
               <div class="departures">
-                ${result.Departures?.map(departure => html`
+                ${this.getDisplayedDepartures(result, this.getPlatformFilter()).map(departure => html`
                   <departure-entry .departure=${departure}></departure-entry>
                 `)}
+                ${this.getDisplayedDepartures(result, this.getPlatformFilter()).length === 0
+                  ? html`<div>${this.getPlatformFilter().size > 0
+                    ? "Keine Abfahrten für die gewählten Bahnsteige."
+                    : "Keine bevorstehenden Abfahrten."}</div>`
+                  : ""}
               </div>
             </div>
           `,

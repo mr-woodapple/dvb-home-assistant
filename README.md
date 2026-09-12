@@ -38,6 +38,20 @@ Now go ahead and copy paste that number into the card config in Home Assistant.
 
 ![](./docs/screenshots/docs-stopid-request-answer.png)
 
+#### Optional platform filter
+Use `platforms` to show departures from only specific platform labels. The visual editor accepts comma-separated labels; YAML configuration uses a list.
+
+```yaml
+type: custom:dvb-home-assistant
+stopId: "33000037"
+platforms:
+	- "5"
+	- "7"
+retrievedDepartureLimit: 50
+```
+
+`retrievedDepartureLimit` controls how many departures are requested before filtering. It defaults to `50` and accepts whole numbers from `1` through `100`; the card displays up to five matching departures.
+
 
 ## ⚙️ Development
 To start a development server (assuming you have run `npm install` already), open two command lines. In the first one, you run
