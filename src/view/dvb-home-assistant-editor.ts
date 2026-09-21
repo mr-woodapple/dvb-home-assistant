@@ -51,7 +51,7 @@ export class DvbHomeAssistantEditor extends LitElement {
         )}
         <p class="helper-text">
           Die ID für die anzuzeigenden Haltestelle findest du so:
-          <a href="https://github.com/mr-woodapple/dvb-home-assistant/tree/master" target"_blank">Klick mich</a>
+          <a href="https://github.com/mr-woodapple/dvb-home-assistant/tree/master" target"="_blank">Klick mich</a>
         </p>
       </div>
     `
@@ -79,14 +79,14 @@ export class DvbHomeAssistantEditor extends LitElement {
     }
 
     return html`
-      <ha-textfield
+      <ha-input
         name="${name}"
         label="${label}"
         type="${type ?? 'text'}"
         .value="${value}"
         @keyup="${this._valueChanged}"
         @change="${this._valueChanged}"
-      ></ha-textfield>
+      ></ha-input>
     `;
   }
 
