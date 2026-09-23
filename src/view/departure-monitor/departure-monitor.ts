@@ -49,10 +49,6 @@ export class DepartureMonitor extends LitElement {
     }
   `
 
-  private getPlatformFilter(): Set<string> {
-    return parsePlatformFilter(this.platforms);
-  }
-
   private getDisplayedDepartureLimit(): number {
     if (this.displayedDepartureLimit === undefined || isNaN(this.displayedDepartureLimit)) {
       return 5;
@@ -74,6 +70,7 @@ export class DepartureMonitor extends LitElement {
   }
 
   render() {
+    const platformFilter = parsePlatformFilter(this.platforms);
     return html`
       <div class="departure-monitor">
         ${this._fetchDepartures.render({
@@ -89,11 +86,11 @@ export class DepartureMonitor extends LitElement {
               </div>
 
               <div class="departures">
-                ${this.getDisplayedDepartures(result, this.getPlatformFilter()).map(departure => html`
+                ${this.getDisplayedDepartures(result, platformFilter).map(departure => html`
                   <departure-entry .departure=${departure}></departure-entry>
                 `)}
-                ${this.getDisplayedDepartures(result, this.getPlatformFilter()).length === 0
-                  ? html`<div>${this.getPlatformFilter().size > 0
+                ${this.getDisplayedDepartures(result, platformFilter).length === 0
+                  ? html`<div>${platformFilter.size > 0
                     ? "Keine Abfahrten für die gewählten Bahnsteige."
                     : "Keine bevorstehenden Abfahrten."}</div>`
                   : ""}
