@@ -20,7 +20,7 @@ export class DvbHomeAssistantEditor extends LitElement {
 
   static styles = css`
     .card-config {
-      display: flex; 
+      display: flex;
       flex-direction: column;
     }
 
@@ -45,14 +45,24 @@ export class DvbHomeAssistantEditor extends LitElement {
     return html`
       <div class="card-config">
         <h2>Allgemeine Einstellungen</h2>
-      
+
         ${this.addTextField(
-          "stopId", "Haltestellen Id", "text"
-        )}
-        <p class="helper-text">
-          Die ID für die anzuzeigenden Haltestelle findest du so:
-          <a href="https://github.com/mr-woodapple/dvb-home-assistant/tree/master" target"="_blank">Klick mich</a>
-        </p>
+      "stopId", "Haltestellen Id", "text"
+    )}
+    <p class="helper-text">
+      Die ID für die anzuzeigenden Haltestelle findest du so:
+      <a href="https://github.com/mr-woodapple/dvb-home-assistant/tree/master" target"="_blank">Klick mich</a>
+    </p>
+        ${this.addPlatformsField()}
+        ${this.addTextField(
+      "retrievedDepartureLimit", "Abzurufende Abfahrten", "number", "50"
+    )}
+    <p class="helper-text">
+      Die maximale Anzahl der abzurufenden Abfahrten ist 100. Sie sollte mindestens der Anzahl der angezeigten Abfahrten entsprechen.
+    </p>
+        ${this.addTextField(
+      "displayedDepartureLimit", "Angezeigte Abfahrten", "number", "5"
+    )}
       </div>
     `
   }
@@ -90,14 +100,28 @@ export class DvbHomeAssistantEditor extends LitElement {
     `;
   }
 
+  addPlatformsField(): TemplateResult {
+    const value = this._config?.platforms?.join(",") ?? "";
+
+    return html`
+      <ha-input
+        name="platforms"
+        label="Bahnsteige"
+        .value="${value}"
+        @keyup="${this._valueChanged}"
+        @change="${this._valueChanged}"
+      ></ha-input>
+    `;
+  }
+
 
   //
   // Define helpers for setting variables
-  // 
+  //
 
   /**
    * Handles values changes from input elements.
-   * 
+   *
    * @param event Input event
    */
   _valueChanged(event: Event): void {
@@ -106,8 +130,14 @@ export class DvbHomeAssistantEditor extends LitElement {
     const target = event.target as HTMLInputElement | HTMLSelectElement;
     const name = target.getAttribute('name');
 
-    let value: string | boolean | number | null = target.value;
+    let value: string | string[] | boolean | number | null | undefined = target.value;
     if (!name) return;
+
+    if (name === "platforms") {
+      value = target.value.split(",");
+    } else if (name === "retrievedDepartureLimit" || name === "displayedDepartureLimit") {
+      value = target.value === "" ? undefined : Number(target.value);
+    }
 
     this.setConfigValue(name as keyof Config, value);
   }
@@ -115,15 +145,15 @@ export class DvbHomeAssistantEditor extends LitElement {
 
   //
   // Define editor helper functions
-  // 
+  //
 
   /**
    * Get the value for a given config item.
    * Is limited to the keys of the config iterface.
-   * 
-   * @param path 
-   * @param defaultValue 
-   * @returns 
+   *
+   * @param path
+   * @param defaultValue
+   * @returns
    */
   getConfigValue(path: keyof Config, defaultValue?: unknown): unknown {
     if (!this._config) {
@@ -136,9 +166,9 @@ export class DvbHomeAssistantEditor extends LitElement {
 
   /**
    * Handles updating the config with the new value.
-   * 
-   * @param path 
-   * @param value 
+   *
+   * @param path
+   * @param value
    */
   setConfigValue(path: keyof Config, value: unknown): unknown {
     if (!this._config) {

@@ -14,7 +14,7 @@ export class MainCardStructure extends LitElement {
     ha-card {
       display: flex;
     }
-      
+
     .content-container {
       width: 100%;
       margin: 2rem;
@@ -31,7 +31,12 @@ export class MainCardStructure extends LitElement {
         </div>
 
         <div class="content-container">
-          <departure-monitor .stopId="${this.config?.stopId}"></departure-monitor>
+          <departure-monitor
+            .stopId=${this.config?.stopId ?? ""}
+            .platforms=${this.config?.platforms ?? []}
+            .retrievedDepartureLimit=${this.config?.retrievedDepartureLimit}
+            .displayedDepartureLimit=${this.config?.displayedDepartureLimit}
+          ></departure-monitor>
         </div>
       </ha-card>
     `
