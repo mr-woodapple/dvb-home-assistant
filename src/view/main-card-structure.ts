@@ -25,15 +25,11 @@ export class MainCardStructure extends LitElement {
     return html`
       <ha-card>
         <ha-ripple></ha-ripple>
-
-        <div class="header-container">
-          ${html`<h1 class="card-header">${this.config?.title}</h1>`}
-        </div>
-
         <div class="content-container">
+          ${this.config?.title ? html`<h1 class="card-header">${this.config.title}</h1>` : ""}
           <departure-monitor
             .stopId=${this.config?.stopId ?? ""}
-            .platforms=${this.config?.platforms ?? []}
+            .platforms=${this.config?.platforms ?? ""}
             .retrievedDepartureLimit=${this.config?.retrievedDepartureLimit}
             .displayedDepartureLimit=${this.config?.displayedDepartureLimit}
           ></departure-monitor>

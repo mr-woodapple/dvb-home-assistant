@@ -39,14 +39,12 @@ Now go ahead and copy paste that number into the card config in Home Assistant.
 ![](./docs/screenshots/docs-stopid-request-answer.png)
 
 #### Optional platform filter
-Use `platforms` to show departures from only specific platform labels. The visual editor accepts comma-separated labels; YAML configuration uses a list.
+Use `platforms` to show departures from only specific platform labels. Both the visual editor and YAML configuration accept a comma-separated string of labels.
 
 ```yaml
 type: custom:dvb-home-assistant
 stopId: "33000037"
-platforms:
-    - "5"
-    - "7"
+platforms: "5,7"
 retrievedDepartureLimit: 50
 displayedDepartureLimit: 5
 ```

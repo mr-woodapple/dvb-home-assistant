@@ -4,7 +4,6 @@ import { Config, DefaultConfig, StubConfig } from 'types/config/config.js';
 import { Hass } from 'types/config/hass.js';
 
 import "./view/main-card-structure.ts"
-import { DvbHomeAssistantEditor } from 'view/dvb-home-assistant-editor.js';
 
 /**
  * Entry element for the Lovelace card.
@@ -29,10 +28,39 @@ export class DvbHomeAssistant extends LitElement {
     this.config = config;
   }
 
-  // Get a new instance of the editor for 
-  // Home Assistants visual card editor feature.
-  static getConfigElement() {
-    return document.createElement('dvb-home-assistant-editor');
+  // Declarative config form for Home Assistants visual card editor feature.
+  static getConfigForm() {
+    return {
+      schema: [
+        { name: "stopId", selector: { text: {} } },
+        { name: "platforms", selector: { text: {} } },
+        { name: "retrievedDepartureLimit", selector: { number: { min: 1, max: 100 } } },
+        { name: "displayedDepartureLimit", selector: { number: { min: 1 } } },
+        { name: "title", selector: { text: {} } },
+      ],
+      computeLabel: (schema: { name: string }) => {
+        switch (schema.name) {
+          case "stopId": return "Haltestellen Id";
+          case "platforms": return "Bahnsteige";
+          case "retrievedDepartureLimit": return "Abzurufende Abfahrten";
+          case "displayedDepartureLimit": return "Angezeigte Abfahrten";
+          case "title": return "Titel";
+          default: return schema.name;
+        }
+      },
+      computeHelper: (schema: { name: string }) => {
+        switch (schema.name) {
+          case "stopId":
+            return "Die ID für die anzuzeigenden Haltestelle findest du hier: https://github.com/mr-woodapple/dvb-home-assistant/tree/master";
+          case "platforms":
+            return "Optional: Kommagetrennte Bahnsteig-Bezeichnungen, z. B. „1, 2, 7“. Leer lassen, um Abfahrten von allen Bahnsteigen anzuzeigen.";
+          case "retrievedDepartureLimit":
+            return "Die maximale Anzahl der abzurufenden Abfahrten ist 100. Sie sollte mindestens der Anzahl der angezeigten Abfahrten entsprechen.";
+          default:
+            return undefined;
+        }
+      },
+    };
   }
 
   // Expose stub config for Home Assistants card picker preview
@@ -40,10 +68,6 @@ export class DvbHomeAssistant extends LitElement {
     return StubConfig;
   }
 }
-
-// Register the editor 
-// Not sure why this above the editor isn't enough: @customElement("dvb-home-assistant-editor")
-customElements.define('dvb-home-assistant-editor', DvbHomeAssistantEditor)
 
 // HACS register
 window.customCards = window.customCards || [];

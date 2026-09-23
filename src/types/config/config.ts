@@ -1,7 +1,7 @@
 export interface Config {
   title?: string,
   stopId: string,
-  platforms?: string[],
+  platforms?: string,
   retrievedDepartureLimit?: number,
   displayedDepartureLimit?: number,
 }
