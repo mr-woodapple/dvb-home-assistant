@@ -1,7 +1,7 @@
 {
   "name": "dvb-home-assistant",
   "author": "mr-woodapple",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A departure monitor for DVB & VVO as a lovelace card for Home Assitant.",
   "license": "MIT",
   "keywords": [
