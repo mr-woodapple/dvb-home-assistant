@@ -52,6 +52,8 @@ export class DvbHomeAssistant extends LitElement {
         switch (schema.name) {
           case "stopId":
             return "Die ID für die anzuzeigenden Haltestelle findest du hier: https://github.com/mr-woodapple/dvb-home-assistant/tree/master";
+          case "platforms":
+            return "Optional: Kommagetrennte Bahnsteig-Bezeichnungen, z. B. „1, 2, 7“. Leer lassen, um Abfahrten von allen Bahnsteigen anzuzeigen.";
           case "retrievedDepartureLimit":
             return "Die maximale Anzahl der abzurufenden Abfahrten ist 100. Sie sollte mindestens der Anzahl der angezeigten Abfahrten entsprechen.";
           default:

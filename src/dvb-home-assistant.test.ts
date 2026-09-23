@@ -45,11 +45,13 @@ describe("DvbHomeAssistant.getConfigForm", () => {
     expect(computeHelper({ name: "stopId" })).toBe(
       "Die ID für die anzuzeigenden Haltestelle findest du hier: https://github.com/mr-woodapple/dvb-home-assistant/tree/master"
     );
+    expect(computeHelper({ name: "platforms" })).toBe(
+      "Optional: Kommagetrennte Bahnsteig-Bezeichnungen, z. B. „1, 2, 7“. Leer lassen, um Abfahrten von allen Bahnsteigen anzuzeigen."
+    );
     expect(computeHelper({ name: "retrievedDepartureLimit" })).toBe(
       "Die maximale Anzahl der abzurufenden Abfahrten ist 100. Sie sollte mindestens der Anzahl der angezeigten Abfahrten entsprechen."
     );
     expect(computeHelper({ name: "displayedDepartureLimit" })).toBeUndefined();
-    expect(computeHelper({ name: "platforms" })).toBeUndefined();
     expect(computeHelper({ name: "title" })).toBeUndefined();
   });
 });
