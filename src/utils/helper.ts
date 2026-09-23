@@ -3,6 +3,22 @@ import { Departure } from "types/types";
 
 
 /**
+ * Parses a comma-separated platform filter string into a normalized set of labels.
+ * Trims whitespace, discards blank entries, and collapses duplicates.
+ * 
+ * @param platforms Comma-separated platform labels.
+ * @returns Set of unique, trimmed platform labels.
+ */
+export function parsePlatformFilter(platforms: string): Set<string> {
+  return new Set(
+    platforms
+      .split(",")
+      .map((platform) => platform.trim())
+      .filter((platform) => platform.length > 0)
+  );
+}
+
+/**
  * Converts a Microsoft JSON date string to a standard JavaScript date object.
  * If pattern matching on the string fails, the standard date object is returned.
  * 

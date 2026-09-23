@@ -3,6 +3,7 @@ import { Task } from '@lit/task';
 import { customElement, property } from "lit/decorators.js";
 import { fetchDepartures } from "services/api-service";
 import { Departure, StationMonitorRequest } from "types/types";
+import { parsePlatformFilter } from "utils/helper";
 
 import "./departure-entry.ts"
 import * as Icons from "../../assets/icons"
@@ -17,7 +18,7 @@ import * as Icons from "../../assets/icons"
 export class DepartureMonitor extends LitElement {
 
   @property() stopId: string = "";
-  @property({ attribute: false }) platforms: string[] = [];
+  @property({ attribute: false }) platforms: string = "";
   @property({ attribute: false }) retrievedDepartureLimit?: number;
   @property({ attribute: false }) displayedDepartureLimit?: number;
 
@@ -49,11 +50,7 @@ export class DepartureMonitor extends LitElement {
   `
 
   private getPlatformFilter(): Set<string> {
-    return new Set(
-      this.platforms
-        .map((platform) => platform.trim())
-        .filter((platform) => platform.length > 0)
-    );
+    return parsePlatformFilter(this.platforms);
   }
 
   private getDisplayedDepartureLimit(): number {

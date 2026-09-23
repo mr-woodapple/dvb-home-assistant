@@ -33,7 +33,7 @@ export class MainCardStructure extends LitElement {
         <div class="content-container">
           <departure-monitor
             .stopId=${this.config?.stopId ?? ""}
-            .platforms=${this.config?.platforms ?? []}
+            .platforms=${this.config?.platforms ?? ""}
             .retrievedDepartureLimit=${this.config?.retrievedDepartureLimit}
             .displayedDepartureLimit=${this.config?.displayedDepartureLimit}
           ></departure-monitor>
