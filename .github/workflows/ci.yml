@@ -24,14 +24,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: Create release
-        if: github.ref_type == 'tag'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          TAG: ${{ github.ref_name }}
-        shell: bash
-        run: |
-          ARGS=("$TAG" --verify-tag --generate-notes --draft --title "DVB Home Assistant $TAG")
-          gh release create "${ARGS[@]}" dist/dvb-home-assistant.js
